@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Таня Мальцева](https://up.htmlacademy.ru/javascript/22/user/1331067).
-* Наставник: `Неизвестно`.
+* Наставник: [Михаил Кислый](https://htmlacademy.ru/profile/smart-grizzly).
 
 ---
 
