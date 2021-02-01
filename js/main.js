@@ -15,10 +15,7 @@ const getRandomInteger = function(parameter1, parameter2) {
 getRandomInteger(1, 20);
 
 const checkStringLength = function(checkedString, maxLength) {
-  if (checkedString.length <= maxLength) {
-    return true;
-  }
-  return false;
+  return checkedString.length <= maxLength;
 }
 
 checkStringLength('проверка', 15);
