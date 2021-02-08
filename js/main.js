@@ -20,13 +20,13 @@ const checkStringLength = function(checkedString, maxLength) {
 
 checkStringLength('проверка', 15);
 
-const getRandomArrayElement = (elements) => {
+const getRandomArrayElement = function(elements) {
   return elements[getRandomInteger(0, elements.length - 1)];
 };
 
 const PHOTO_DESCRIPTION_COUNT = 25;
 const COMMENT_COUNT = 6;
-const messages = [
+const MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -34,7 +34,7 @@ const messages = [
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
-const names = [
+const NAMES = [
   'Кузя',
   'Оскар',
   'Мурзик',
@@ -52,8 +52,8 @@ const createComment = function() {
   return {
     id: getRandomInteger(0, 999),
     avatar: 'img/avatar' + getRandomInteger(0, 6) + '.svg',
-    message: getRandomArrayElement(messages),
-    name: getRandomArrayElement(names),
+    message: getRandomArrayElement(MESSAGES),
+    name: getRandomArrayElement(NAMES),
   }
 }
 
@@ -63,7 +63,9 @@ const createPhotoDescription = function() {
     url: null,
     description: 'Фотография, опублекованная на сайте Кекстаграм',
     likes: getRandomInteger(15, 200),
-    comments: new Array(COMMENT_COUNT).fill(null).map(() => createComment()),
+    comments: new Array(COMMENT_COUNT).fill(null).map(function() {
+      createComment();
+    }),
   }
 }
 
