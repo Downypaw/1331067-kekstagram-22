@@ -65,5 +65,3 @@ for (let i = 0; i < PHOTO_DESCRIPTION_COUNT; i++) {
   description.url = 'photo/' + (i + 1) + '.jpg';
   photoDescriptions[i] = description;
 }
-
-export {photoDescriptions};
