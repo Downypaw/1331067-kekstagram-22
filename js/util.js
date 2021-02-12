@@ -1,4 +1,4 @@
-const getRandomInteger = function(parameter1, parameter2) {
+const getRandomInteger = (parameter1, parameter2) => {
   if(parameter1 >= 0 && parameter2 >= 0) {
     if(parameter1 <= parameter2) {
       parameter1 = Math.ceil(parameter1);
@@ -12,13 +12,13 @@ const getRandomInteger = function(parameter1, parameter2) {
   }
 }
 
-const checkStringLength = function(checkedString, maxLength) {
+const checkStringLength = (checkedString, maxLength) => {
   return checkedString.length <= maxLength;
 }
 
 checkStringLength('проверка', 15);
 
-const getRandomArrayElement = function(elements) {
+const getRandomArrayElement = (elements) => {
   return elements[getRandomInteger(0, elements.length - 1)];
 };
 

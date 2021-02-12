@@ -24,7 +24,7 @@ const NAMES = [
   'Сабрина',
 ];
 
-const createComment = function() {
+const createComment = () => {
   return {
     id: getRandomInteger(0, 999),
     avatar: 'img/avatar' + getRandomInteger(0, 6) + '.svg',
@@ -33,11 +33,11 @@ const createComment = function() {
   }
 }
 
-const createCommentsList = function() {
+const createCommentsList = () => {
   let comments = [];
   while(comments.length < COMMENT_COUNT) {
     let comment = createComment();
-    let isRepeat = comments.some(function(element) {
+    let isRepeat = comments.some((element) => {
       return element.id === comment.id || element.name === comment.name
     });
     if(!isRepeat) {
@@ -48,7 +48,7 @@ const createCommentsList = function() {
 }
 
 
-const createPhotoDescription = function() {
+const createPhotoDescription = () => {
   return {
     id: null,
     url: null,
