@@ -62,6 +62,8 @@ let photoDescriptions = [];
 for (let i = 0; i < PHOTO_DESCRIPTION_COUNT; i++) {
   let description = createPhotoDescription();
   description.id = i + 1;
-  description.url = 'photo/' + (i + 1) + '.jpg';
+  description.url = 'photos/' + (i + 1) + '.jpg';
   photoDescriptions[i] = description;
 }
+
+export {photoDescriptions};
