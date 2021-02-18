@@ -27,7 +27,7 @@ const NAMES = [
 const createComment = () => {
   return {
     id: getRandomInteger(0, 999),
-    avatar: 'img/avatar' + getRandomInteger(0, 6) + '.svg',
+    avatar: 'img/avatar-' + getRandomInteger(1, 6) + '.svg',
     message: getRandomArrayElement(MESSAGES),
     name: getRandomArrayElement(NAMES),
   }
