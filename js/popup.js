@@ -49,7 +49,7 @@ pictures.forEach((picture) => {
       comment.classList.add('social__comment');
       avatar.classList.add('social__picture');
       avatar.src = currentElement.comments[i].avatar;
-      avatar.alt = "Аватар комментатора фотографии"
+      avatar.alt = 'Аватар комментатора фотографии';
       avatar.width = 35;
       avatar.height = 35;
       text.classList.add('social__text');
@@ -60,7 +60,6 @@ pictures.forEach((picture) => {
     }
     photoDescription.textContent = currentElement.description;
     commentsList.append(commentsListFragment);
-    console.log(evt.currentTarget);
   });
 
   picture.addEventListener('keydown', (evt) => {
