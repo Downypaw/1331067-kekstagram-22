@@ -22,4 +22,12 @@ const getRandomArrayElement = (elements) => {
   return elements[getRandomInteger(0, elements.length - 1)];
 };
 
-export {getRandomInteger, checkStringLength, getRandomArrayElement};
+const isEscEvent = (evt) => {
+  return evt.key === ('Escape' || 'Esc');
+};
+
+const isEnterEvent = (evt) => {
+  return evt.key === 'Enter';
+};
+
+export {getRandomInteger, checkStringLength, getRandomArrayElement, isEscEvent, isEnterEvent};
