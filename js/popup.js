@@ -1,6 +1,8 @@
 import {isEscEvent, isEnterEvent} from './util.js';
 import {photoDescriptions} from './data.js';
 
+const AVATAR_WIDTH = 35;
+const AVATAR_HEIGHT = 35;
 const bigPicture = document.querySelector('.big-picture');
 const pictures = document.querySelectorAll('.picture');
 const userModalCloseElement = document.querySelector('.big-picture__cancel');
@@ -50,8 +52,8 @@ pictures.forEach((picture) => {
       avatar.classList.add('social__picture');
       avatar.src = currentElement.comments[i].avatar;
       avatar.alt = 'Аватар комментатора фотографии';
-      avatar.width = 35;
-      avatar.height = 35;
+      avatar.width = AVATAR_WIDTH;
+      avatar.height = AVATAR_HEIGHT;
       text.classList.add('social__text');
       text.textContent = currentElement.comments[i].message;
       comment.appendChild(avatar);
