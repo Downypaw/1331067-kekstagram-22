@@ -1,5 +1,9 @@
 /* Общие стили. Каркас
    ========================================================================== */
+:root {
+  --scale: 1;
+  --value;
+}
 
 @font-face {
   font-family: "Open Sans";
@@ -412,6 +416,10 @@ main {
           transform: translateX(-50%);
 }
 
+.change-scale {
+  transform: scale(var(--scale));
+}
+
 .scale {
   margin: 0;
   padding: 10px;
@@ -644,28 +652,28 @@ main {
 }
 
 .effects__preview--chrome {
-  -webkit-filter: grayscale(1);
-          filter: grayscale(1);
+  -webkit-filter: grayscale(var(--value));
+          filter: grayscale(var(--value));
 }
 
 .effects__preview--sepia {
-  -webkit-filter: sepia(1);
-          filter: sepia(1);
+  -webkit-filter: sepia(var(--value));
+          filter: sepia(var(--value));
 }
 
 .effects__preview--marvin {
-  -webkit-filter: invert(100%);
-          filter: invert(100%);
+  -webkit-filter: invert(var(--value));
+          filter: invert(var(--value));
 }
 
 .effects__preview--phobos {
-  -webkit-filter: blur(3px);
-          filter: blur(3px);
+  -webkit-filter: blur(var(--value));
+          filter: blur(var(--value));
 }
 
 .effects__preview--heat {
-  -webkit-filter: brightness(3);
-          filter: brightness(3);
+  -webkit-filter: brightness(var(--value));
+          filter: brightness(var(--value));
 }
 
 
