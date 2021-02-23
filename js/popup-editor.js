@@ -59,9 +59,8 @@ buttonBigger.addEventListener('click', () => {
 const check = () => {
   for (let i = 0; i < radioButtons.length; i++) {
     if(radioButtons[i].checked) {
-      const effectClass = 'effects__preview--' + radioButtons[i].value;
-      img.className = effectClass;
-      if (radioButtons[i].value == 'marvin') {
+      img.className = 'effects__preview--' + radioButtons[i].value;
+      if (radioButtons[i].value === 'marvin') {
         slider.noUiSlider.updateOptions({
           range: {
             min: 0,
@@ -74,7 +73,7 @@ const check = () => {
         effectValue.value = 100;
         effectValue.setAttribute('value', effectValue.value);
       }
-      else if (radioButtons[i].value == 'phobos') {
+      else if (radioButtons[i].value === 'phobos') {
         slider.noUiSlider.updateOptions({
           range: {
             min: 0,
@@ -87,7 +86,7 @@ const check = () => {
         effectValue.value = 3;
         effectValue.setAttribute('value', effectValue.value);
       }
-      else if (radioButtons[i].value == 'heat') {
+      else if (radioButtons[i].value === 'heat') {
         slider.noUiSlider.updateOptions({
           range: {
             min: 1,
@@ -124,7 +123,7 @@ radioButtons.forEach((radioButton) => {
   radioButton.addEventListener('click', check)
 });
 
-
+// eslint-disable-next-line no-undef
 noUiSlider.create(slider, {
   range: {
     min: 0,
@@ -150,19 +149,16 @@ img.className = 'effects__preview--none';
 slider.noUiSlider.on('update', (values, handle) => {
   effectValue.value = values[handle];
   effectValue.setAttribute('value', effectValue.value);
-  if (img.className == 'effects__preview--marvin') {
-    img.style.setProperty('--value', effectValue.value + '%');
-  }
-  else if (img.className == 'effects__preview--phobos') {
-    img.style.setProperty('--value', effectValue.value + 'px');
-  }
-  else {
-    img.style.setProperty('--value', effectValue.value);
+  switch (img.className) {
+    case 'effects__preview--marvin':
+      img.style.setProperty('--value', effectValue.value + '%');
+      break;
+    case 'effects__preview--phobos':
+      img.style.setProperty('--value', effectValue.value + 'px');
+      break;
+    default:
+      img.style.setProperty('--value', effectValue.value);
   }
 
-  if (img.className == 'effects__preview--none') {
-    slider.classList.add('hidden');
-  } else {
-    slider.classList.remove('hidden');
-  }
+  (img.className === 'effects__preview--none') ? slider.classList.add('hidden') : slider.classList.remove('hidden');
 });
