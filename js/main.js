@@ -1,3 +1,4 @@
 import './data.js';
 import './rendering.js';
-import './popup.js';
+import './popup-fullscreen.js';
+import './popup-editor.js';
