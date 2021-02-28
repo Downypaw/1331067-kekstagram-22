@@ -35,6 +35,10 @@ const closeUserModal = (modal) => {
   modal.classList.remove('open');
   pageBody.classList.remove('.modal-open');
   document.removeEventListener('keydown', onPopupEscKeydown);
+
+  if (modal.parentNode.classList.contains('resetting')) {
+    modal.parentNode.reset();
+  }
 };
 
-export {openUserModal, closeUserModal, onEnterOpen, onEnterClose};
+export {openUserModal, closeUserModal, onEnterOpen, onEnterClose, onPopupEscKeydown};

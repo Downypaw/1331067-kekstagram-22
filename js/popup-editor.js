@@ -1,4 +1,4 @@
-import {openUserModal, closeUserModal, onEnterClose} from './popup.js';
+import {openUserModal, closeUserModal} from './popup.js';
 
 const imgUploadInput = document.querySelector('.img-upload__input');
 const editor = document.querySelector('.img-upload__overlay');
@@ -13,6 +13,8 @@ const slider = document.querySelector('.effect-level__slider');
 const radioButtons = document.querySelectorAll('.effects__radio');
 const effectValue = document.querySelector('.effect-level__value');
 
+form.classList.add('resetting');
+
 const changeScale = () => {
   imgContainer.style.setProperty('--scale', scaleValue.value.replace(/%/g, '')/100);
   imgContainer.classList.add('change-scale');
@@ -24,13 +26,11 @@ imgUploadInput.addEventListener('change', () => {
 
 userModalCloseElement.addEventListener('click', () => {
   closeUserModal(editor);
-  form.reset();
   imgContainer.classList.remove('change-scale');
 });
 
 userModalCloseElement.addEventListener('keydown', () => {
-  onEnterClose();
-  form.reset();
+  closeUserModal(editor);
   imgContainer.classList.remove('change-scale');
 });
 
