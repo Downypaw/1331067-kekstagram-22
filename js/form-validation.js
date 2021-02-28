@@ -1,6 +1,7 @@
 import {isEscEvent} from './util.js';
 
 const MAX_HASHTAG_LENGTH = 20;
+const MAX_HASHTAG_COUNT = 5;
 const hashtagsInput = document.querySelector('.text__hashtags');
 const textField = document.querySelector('.text');
 
@@ -14,7 +15,7 @@ hashtagsInput.addEventListener('input', () => {
     }
   }
 
-  if (hashtagsLowerCase.length > 5) {
+  if (hashtagsLowerCase.length > MAX_HASHTAG_COUNT) {
     hashtagsInput.setCustomValidity('Можно указать не более 5 хэш-тегов');
   }
   else if (hashtagsLowerCase.some((hashtag) => hashtag[0] !== '#' && hashtag.length > 0)) {
