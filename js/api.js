@@ -5,6 +5,8 @@ const messageSuccess = document.querySelector('#success').content.querySelector(
 const messageError = document.querySelector('#error').content.querySelector('.error');
 const messageSuccessClose = messageSuccess.querySelector('.success__button');
 const messageErrorClose = messageError.querySelector('.error__button');
+const getDataAddress = 'https://22.javascript.pages.academy/kekstagram/data';
+const sendDataAddress = 'https://22.javascript.pages.academy/kekstagram';
 
 messageSuccess.classList.add('hidden');
 messageError.classList.add('hidden');
@@ -22,7 +24,7 @@ const onFailSubmit = (modal) => {
 }
 
 const getData = (onSuccess, onFail) => {
-  fetch('https://22.javascript.pages.academy/kekstagram/data')
+  fetch(getDataAddress)
     .then((response) => {
       if (response.ok) {
         return response.json();
@@ -40,7 +42,7 @@ const getData = (onSuccess, onFail) => {
 
 const sendData = (onSuccess, onFail, body, modal) => {
   fetch(
-    'https://22.javascript.pages.academy/kekstagram',
+    sendDataAddress,
     {
       method: 'POST',
       body,

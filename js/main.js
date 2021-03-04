@@ -1,4 +1,3 @@
-// import './data.js';
 import {showAlert} from './util.js';
 import {render} from './rendering.js';
 import {openFullscreen} from './popup-fullscreen.js';
@@ -10,7 +9,3 @@ getData((photos) => {
   render(photos);
   openFullscreen(photos);
 }, showAlert);
-
-// setUserFormSubmit(closeUserModal);
-
-// console.log(photosData);

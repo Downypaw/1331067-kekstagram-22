@@ -22,7 +22,6 @@ const onEditorEscKeydown = (evt) => {
 
 const openUserModalEditor = () => {
   openUserModal(editor, onEditorEscKeydown);
-  // document.addEventListener('keydown', onEditorEscKeydown);
 }
 
 const closeUserModalEditor = () => {
@@ -30,7 +29,6 @@ const closeUserModalEditor = () => {
   img.className = 'effects__preview--none';
   slider.classList.add('hidden');
   img.style.setProperty('--value', '');
-  // document.removeEventListener('keydown', onEditorEscKeydown);
 }
 
 const changeScale = () => {
@@ -180,12 +178,6 @@ slider.noUiSlider.on('update', (values, handle) => {
 
   (img.className === 'effects__preview--none') ? slider.classList.add('hidden') : slider.classList.remove('hidden');
 });
-
-// const mainPagePart = document.querySelector('main');
-// const messageSuccess = document.querySelector('#success').content.querySelector('.success');
-// const messageError = document.querySelector('#error').content.querySelector('.error');
-// const messageSuccessClose = messageSuccess.querySelector('.success__button');
-// const messageErrorClose = messageError.querySelector('.error__button');
 
 const setUserFormSubmit = (onSuccess) => {
   form.addEventListener('submit', (evt) => {

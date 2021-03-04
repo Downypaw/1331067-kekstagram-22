@@ -27,24 +27,6 @@ const onEnterClose = (evt) => {
   }
 };
 
-// const openUserModal = (modal) => {
-//   modal.classList.remove('hidden');
-//   modal.classList.add('open');
-//   pageBody.classList.add('.modal-open');
-//   document.addEventListener('keydown', onPopupEscKeydown);
-// };
-//
-// const closeUserModal = (modal) => {
-//   modal.classList.add('hidden');
-//   modal.classList.remove('open');
-//   pageBody.classList.remove('.modal-open');
-//   document.removeEventListener('keydown', onPopupEscKeydown);
-//
-//   if (modal.parentNode.classList.contains('resetting')) {
-//     modal.parentNode.reset();
-//   }
-// };
-
 const openUserModal = (modal, func) => {
   modal.classList.remove('hidden');
   modal.classList.add('open');
