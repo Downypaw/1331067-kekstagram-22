@@ -2,13 +2,17 @@ import {isEscEvent, isEnterEvent} from './util.js';
 
 const pageBody = document.querySelector('body');
 
-const onPopupEscKeydown = (evt) => {
+const onEscClose = (evt, func) => {
   const currentElement = document.querySelector('.open');
   if (isEscEvent(evt)) {
     evt.preventDefault();
-    closeUserModal(currentElement);
+    func(currentElement);
   }
 };
+
+const onPopupEscKeydown = (evt) => {
+  onEscClose(evt, closeUserModal);
+}
 
 const onEnterOpen = (evt, func) => {
   if (isEnterEvent(evt)) {
@@ -23,22 +27,40 @@ const onEnterClose = (evt) => {
   }
 };
 
-const openUserModal = (modal) => {
+// const openUserModal = (modal) => {
+//   modal.classList.remove('hidden');
+//   modal.classList.add('open');
+//   pageBody.classList.add('.modal-open');
+//   document.addEventListener('keydown', onPopupEscKeydown);
+// };
+//
+// const closeUserModal = (modal) => {
+//   modal.classList.add('hidden');
+//   modal.classList.remove('open');
+//   pageBody.classList.remove('.modal-open');
+//   document.removeEventListener('keydown', onPopupEscKeydown);
+//
+//   if (modal.parentNode.classList.contains('resetting')) {
+//     modal.parentNode.reset();
+//   }
+// };
+
+const openUserModal = (modal, func) => {
   modal.classList.remove('hidden');
   modal.classList.add('open');
   pageBody.classList.add('.modal-open');
-  document.addEventListener('keydown', onPopupEscKeydown);
+  document.addEventListener('keydown', func);
 };
 
-const closeUserModal = (modal) => {
+const closeUserModal = (modal, func) => {
   modal.classList.add('hidden');
   modal.classList.remove('open');
   pageBody.classList.remove('.modal-open');
-  document.removeEventListener('keydown', onPopupEscKeydown);
+  document.addEventListener('keydown', func);
 
   if (modal.parentNode.classList.contains('resetting')) {
     modal.parentNode.reset();
   }
 };
 
-export {openUserModal, closeUserModal, onEnterOpen, onEnterClose, onPopupEscKeydown};
+export {openUserModal, closeUserModal, onEnterOpen, onEnterClose, onPopupEscKeydown, onEscClose};

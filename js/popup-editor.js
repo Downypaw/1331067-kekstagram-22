@@ -1,4 +1,5 @@
-import {openUserModal, closeUserModal} from './popup.js';
+import {openUserModal, closeUserModal, onEnterClose, onEscClose} from './popup.js';
+import {sendData, onFailSubmit} from './api.js';
 
 const imgUploadInput = document.querySelector('.img-upload__input');
 const editor = document.querySelector('.img-upload__overlay');
@@ -15,22 +16,39 @@ const effectValue = document.querySelector('.effect-level__value');
 
 form.classList.add('resetting');
 
+const onEditorEscKeydown = (evt) => {
+  onEscClose(evt, closeUserModalEditor);
+}
+
+const openUserModalEditor = () => {
+  openUserModal(editor, onEditorEscKeydown);
+  // document.addEventListener('keydown', onEditorEscKeydown);
+}
+
+const closeUserModalEditor = () => {
+  closeUserModal(editor, onEditorEscKeydown);
+  img.className = 'effects__preview--none';
+  slider.classList.add('hidden');
+  img.style.setProperty('--value', '');
+  // document.removeEventListener('keydown', onEditorEscKeydown);
+}
+
 const changeScale = () => {
   imgContainer.style.setProperty('--scale', scaleValue.value.replace(/%/g, '')/100);
   imgContainer.classList.add('change-scale');
 }
 
 imgUploadInput.addEventListener('change', () => {
-  openUserModal(editor);
+  openUserModalEditor();
 });
 
 userModalCloseElement.addEventListener('click', () => {
-  closeUserModal(editor);
+  closeUserModalEditor();
   imgContainer.classList.remove('change-scale');
 });
 
-userModalCloseElement.addEventListener('keydown', () => {
-  closeUserModal(editor);
+userModalCloseElement.addEventListener('keydown', (evt) => {
+  onEnterClose(evt);
   imgContainer.classList.remove('change-scale');
 });
 
@@ -162,3 +180,25 @@ slider.noUiSlider.on('update', (values, handle) => {
 
   (img.className === 'effects__preview--none') ? slider.classList.add('hidden') : slider.classList.remove('hidden');
 });
+
+// const mainPagePart = document.querySelector('main');
+// const messageSuccess = document.querySelector('#success').content.querySelector('.success');
+// const messageError = document.querySelector('#error').content.querySelector('.error');
+// const messageSuccessClose = messageSuccess.querySelector('.success__button');
+// const messageErrorClose = messageError.querySelector('.error__button');
+
+const setUserFormSubmit = (onSuccess) => {
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    sendData(
+      () => onSuccess(editor),
+      () => onFailSubmit(editor),
+      new FormData(evt.target),
+    );
+  });
+};
+
+setUserFormSubmit(closeUserModalEditor);
+
+export {setUserFormSubmit};
