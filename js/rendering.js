@@ -6,9 +6,7 @@ const pictureTemplate = document.querySelector('#picture').content.querySelector
 const picturesListFragment = document.createDocumentFragment();
 
 const getPostRank = (post) => {
-  let rank = post.comments.length;
-
-  return rank;
+  return post.comments.length;
 };
 
 const sortPosts = (postA, postB) => {
@@ -28,7 +26,7 @@ const render = (photos) => {
     picturesListFragment.appendChild(picture);
   });
   const posts = document.querySelectorAll('.picture');
-  if(posts.length > 0) {
+  if(posts.length) {
     posts.forEach((post) => {
       post.parentNode.removeChild(post)
     })
