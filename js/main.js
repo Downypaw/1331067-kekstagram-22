@@ -14,7 +14,7 @@ getData((photos) => {
   render(photos);
   openFullscreen(photos);
   showFiltration();
-  getPopularPhotos(photos, _.debounce(() => renderPopularPhotos(photos), RERENDER_DELAY));
-  getDefaultPhotos(photos, _.debounce(() => render(photos), RERENDER_DELAY));
-  getRandomPhotos(photos, _.debounce(() => renderRandomPhotos(photos), RERENDER_DELAY));
+  getPopularPhotos(photos, _.debounce(() => {renderPopularPhotos(photos); openFullscreen(photos);}, RERENDER_DELAY));
+  getDefaultPhotos(photos, _.debounce(() => {render(photos); openFullscreen(photos);}, RERENDER_DELAY));
+  getRandomPhotos(photos, _.debounce(() => {renderRandomPhotos(photos); openFullscreen(photos);}, RERENDER_DELAY));
 }, showAlert);
