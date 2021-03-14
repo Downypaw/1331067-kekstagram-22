@@ -19,7 +19,7 @@ const onFullscreenEscKeydown = (evt) => {
 
 const closeUserModalFullscreen = () => {
   closeUserModal(bigPicture, onFullscreenEscKeydown);
-  commentsList.innerHTML = '';
+  commentsList.textContent = '';
 }
 
 const openUserModalPicture = () => {

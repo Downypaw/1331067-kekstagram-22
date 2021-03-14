@@ -1,4 +1,5 @@
 import {getRandomInteger} from './util.js';
+// import {openFullscreen} from './popup-fullscreen';
 
 const RANDOM_PHOTO_COUNT = 10;
 const picturesList = document.querySelector('.pictures');
