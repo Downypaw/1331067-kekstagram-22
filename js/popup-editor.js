@@ -1,6 +1,7 @@
 import {openUserModal, closeUserModal, onEnterClose, onEscClose} from './popup.js';
 import {sendData, onFailSubmit} from './api.js';
 
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 const imgUploadInput = document.querySelector('.img-upload__input');
 const editor = document.querySelector('.img-upload__overlay');
 const userModalCloseElement = document.querySelector('.img-upload__cancel');
@@ -29,6 +30,8 @@ const closeUserModalEditor = () => {
   img.className = 'effects__preview--none';
   slider.classList.add('hidden');
   img.style.setProperty('--value', '');
+  imgContainer.style.setProperty('--scale', '');
+  imgContainer.classList.remove('change-scale');
 }
 
 const changeScale = () => {
@@ -38,11 +41,26 @@ const changeScale = () => {
 
 imgUploadInput.addEventListener('change', () => {
   openUserModalEditor();
+  const file = imgUploadInput.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some((it) => {
+    return fileName.endsWith(it);
+  });
+
+  if (matches) {
+    const reader = new FileReader();
+
+    reader.addEventListener('load', () => {
+      img.src = reader.result;
+    });
+
+    reader.readAsDataURL(file);
+  }
 });
 
 userModalCloseElement.addEventListener('click', () => {
   closeUserModalEditor();
-  imgContainer.classList.remove('change-scale');
 });
 
 userModalCloseElement.addEventListener('keydown', (evt) => {
