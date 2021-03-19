@@ -5,7 +5,7 @@ const MAX_HASHTAG_COUNT = 5;
 const hashtagsInput = document.querySelector('.text__hashtags');
 const textField = document.querySelector('.text');
 
-hashtagsInput.addEventListener('input', () => {
+const hashtagValidation = () => {
   const hashtags = hashtagsInput.value.split(' ');
   let hashtagsLowerCase = [];
 
@@ -45,12 +45,16 @@ hashtagsInput.addEventListener('input', () => {
     hashtagsInput.setCustomValidity('');
   }
   hashtagsInput.reportValidity();
-});
+}
 
-textField.addEventListener('focusin', (evt) => {
-  evt.target.addEventListener('keydown', (evt) => {
-    if (isEscEvent(evt)) {
-      evt.stopPropagation();
-    }
-  });
-});
+const stopDefaultBehavior = (evt) => {
+  if (isEscEvent(evt)) {
+    evt.stopPropagation();
+  }
+}
+
+const onFieldEscKeydown = (evt) => {
+  evt.target.addEventListener('keydown', stopDefaultBehavior);
+}
+
+export {hashtagValidation, hashtagsInput, onFieldEscKeydown, textField, stopDefaultBehavior};

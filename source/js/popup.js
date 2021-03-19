@@ -38,7 +38,7 @@ const closeUserModal = (modal, func) => {
   modal.classList.add('hidden');
   modal.classList.remove('open');
   pageBody.classList.remove('.modal-open');
-  document.addEventListener('keydown', func);
+  document.removeEventListener('keydown', func);
 
   if (modal.parentNode.classList.contains('resetting')) {
     modal.parentNode.reset();

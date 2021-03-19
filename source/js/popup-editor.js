@@ -1,5 +1,6 @@
 import {openUserModal, closeUserModal, onEnterClose, onEscClose} from './popup.js';
 import {sendData, onFailSubmit} from './api.js';
+import {hashtagValidation, hashtagsInput, onFieldEscKeydown, textField, stopDefaultBehavior} from './form-validation.js';
 
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 const imgUploadInput = document.querySelector('.img-upload__input');
@@ -17,21 +18,70 @@ const effectValue = document.querySelector('.effect-level__value');
 
 form.classList.add('resetting');
 
+const makeSmaller = () => {
+  let value = Number(scaleValue.value.replace(/%/g, '')) - 25;
+  if (value >= 25) {
+    scaleValue.value = value + '%';
+  } else {
+    scaleValue.value = 25 + '%';
+  }
+
+  changeScale();
+}
+
+const makeBigger = () => {
+  let value = Number(scaleValue.value.replace(/%/g, '')) + 25;
+  if (value <= 100) {
+    scaleValue.value = value + '%';
+  } else {
+    scaleValue.value = 100 + '%';
+  }
+
+  changeScale();
+}
+
+const closeEditor = (evt) => {
+  closeUserModalEditor();
+  userModalCloseElement.removeEventListener('click', closeEditor);
+  onEnterClose(evt);
+  imgContainer.classList.remove('change-scale');
+}
+
 const onEditorEscKeydown = (evt) => {
   onEscClose(evt, closeUserModalEditor);
 }
 
 const openUserModalEditor = () => {
   openUserModal(editor, onEditorEscKeydown);
+  hashtagsInput.addEventListener('input', hashtagValidation);
+  textField.addEventListener('focusin', onFieldEscKeydown);
+  userModalCloseElement.addEventListener('click', closeEditor);
+  userModalCloseElement.addEventListener('keydown', closeEditor);
+  buttonSmaller.addEventListener('click', makeSmaller);
+  buttonBigger.addEventListener('click', makeBigger);
+  radioButtons.forEach((radioButton) => {
+    radioButton.addEventListener('click', check)
+  });
 }
 
 const closeUserModalEditor = () => {
+  const textFields = Array.from(textField.children);
   closeUserModal(editor, onEditorEscKeydown);
   img.className = 'effects__preview--none';
   slider.classList.add('hidden');
   img.style.setProperty('--value', '');
   imgContainer.style.setProperty('--scale', '');
   imgContainer.classList.remove('change-scale');
+  hashtagsInput.removeEventListener('input', hashtagValidation);
+  textField.removeEventListener('focusin', onFieldEscKeydown);
+  textFields.forEach((textFieldElement) => {
+    textFieldElement.removeEventListener('keydown', stopDefaultBehavior);
+  });
+  buttonSmaller.removeEventListener('click', makeSmaller);
+  buttonBigger.removeEventListener('click', makeBigger);
+  radioButtons.forEach((radioButton) => {
+    radioButton.removeEventListener('click', check)
+  });
 }
 
 const changeScale = () => {
@@ -57,37 +107,6 @@ imgUploadInput.addEventListener('change', () => {
 
     reader.readAsDataURL(file);
   }
-});
-
-userModalCloseElement.addEventListener('click', () => {
-  closeUserModalEditor();
-});
-
-userModalCloseElement.addEventListener('keydown', (evt) => {
-  onEnterClose(evt);
-  imgContainer.classList.remove('change-scale');
-});
-
-buttonSmaller.addEventListener('click', () => {
-  let value = Number(scaleValue.value.replace(/%/g, '')) - 25;
-  if (value >= 25) {
-    scaleValue.value = value + '%';
-  } else {
-    scaleValue.value = 25 + '%';
-  }
-
-  changeScale();
-});
-
-buttonBigger.addEventListener('click', () => {
-  let value = Number(scaleValue.value.replace(/%/g, '')) + 25;
-  if (value <= 100) {
-    scaleValue.value = value + '%';
-  } else {
-    scaleValue.value = 100 + '%';
-  }
-
-  changeScale();
 });
 
 const check = () => {
@@ -152,10 +171,6 @@ const check = () => {
 
 effectValue.value = 1;
 effectValue.setAttribute('value', effectValue.value);
-
-radioButtons.forEach((radioButton) => {
-  radioButton.addEventListener('click', check)
-});
 
 // eslint-disable-next-line no-undef
 noUiSlider.create(slider, {

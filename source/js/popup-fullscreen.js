@@ -1,3 +1,4 @@
+
 import {openUserModal, closeUserModal, onEnterOpen, onEscClose} from './popup.js';
 
 const AVATAR_WIDTH = 35;
